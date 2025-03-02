@@ -39,7 +39,7 @@ def prob_read(gff, chrom, start, end, strand):
 
 	return num_reads/total
 
-print(f"Total # of Intron RNA Seq Reads: {total_reads(gff)}")
+print(f"Total # of Intron RNA Seq Reads: {total_reads(gff):g}")
 print(f"Probability of Your Intron is {prob_read(gff, 'I', 3258, 3504, '-')}")
 
 '''
