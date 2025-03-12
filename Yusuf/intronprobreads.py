@@ -9,7 +9,6 @@ def counttotal():
         for line in fp:
             if line.startswith('#'): continue
             cols = line.split()
-            print(cols[1])
             if cols[1] == 'RNASeq_splice' and cols[2] == 'intron':
                 total_reads += int(float((cols[5])))
         return total_reads
@@ -26,3 +25,4 @@ def prob_intron(start, end, strand):
                 
             
 print(prob_intron(3258, 3504, '-'))
+
