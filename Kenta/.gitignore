@@ -1,0 +1,8 @@
+# ignore Refs Directory
+/Refs
+
+# ignore .fa and .gff
+*.fa
+*.gff
+*.fa.gz
+*.gff.gz
