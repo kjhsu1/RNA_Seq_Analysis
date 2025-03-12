@@ -2,9 +2,12 @@
 /Refs
 
 # ignore .fa and .gff
+
 *.fa
 *.gff
 *.gff2
 *.gff3
 *.fa.gz
 *.gff.gz
+*genome.gz
+*gff3.gz
