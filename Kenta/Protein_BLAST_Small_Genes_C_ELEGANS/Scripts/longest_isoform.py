@@ -1,9 +1,20 @@
 # This script is used to get the longest isoform from a gff file and return the fasta sequence of the longest isoform
+# input should be fasta and gff that are the same small genes
 
 import sys
 
 fasta = sys.argv[1] 
 gff = sys.argv[2]
+
+def has_wormbase_entry(gff):
+	count = 0
+	with open(gff, "r") as file:
+		for line in file:
+			cols = line.split()
+			if cols[1] == "WormBase":
+				count += 1
+	if count == 0: return False
+	else: return True
 
 # get the longest isoform from a gff file
 # return the name of the longest isoform
@@ -12,8 +23,8 @@ def get_longest_isoform(gff):
 	with open(gff, "r") as file:
 		for line in file:
 			cols = line.split()
-			if len(cols) < 9: break
 			if (cols[1], cols[2]) != ("WormBase", "CDS"): continue
+			if len(cols) < 9: continue
 			tags = cols[8].split(";")
 			for tag in tags:
 				if tag.startswith("Parent=Transcript") == False: continue
@@ -58,9 +69,10 @@ def get_longest_isoform_fasta(fasta, longest_isoform):
 			entire_cds += cds
 	return entire_cds
 
-print(f">{get_longest_isoform(gff)}")
-print(get_longest_isoform_fasta(fasta, get_longest_isoform(gff)))
-
+# check if the gff file has a WormBase entries
+if has_wormbase_entry(gff) == True:
+	print(f">{get_longest_isoform(gff)}")
+	print(get_longest_isoform_fasta(fasta, get_longest_isoform(gff)))
 
 
 
